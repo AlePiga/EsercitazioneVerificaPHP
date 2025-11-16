@@ -1,37 +1,37 @@
 <?php
 session_start();
 
-$prezzo_extra = 2;
+$ordini = $_SESSION["ordini"] ?? [];
+$totale_finale = 0;
 
-// Dati ricevuti dal form
-$panino = $_POST["panino"] ?? null;
-$extra = $_POST["extra"] ?? [];
-$salsa = $_POST["salsa"] ?? [];
+foreach ($ordini as $o) {
+	$totale_finale += $o["totale"];
+}
 
-// Calcola il totale
-$totale = 5;
-$totale += count($extra) * $prezzo_extra;
+$path = "../scontrini.json";
 
-// --- Salvataggio su JSON ---
-$ordine = [
-	"utente" => $_SESSION["user"] ?? "Guest",
-	"panino" => $panino,
-	"extra" => $extra,
-	"salse" => $salsa,
-	"totale" => $totale
-];
-
-// Leggi/crea JSON
-$path = "../ordini.json";
-
+// Se il file non esiste, crealo vuoto
 if (!file_exists($path)) {
 	file_put_contents($path, "[]");
 }
 
-$ordini = json_decode(file_get_contents($path), true);
-$ordini[] = $ordine;
+// Leggi il JSON esistente
+$storico = json_decode(file_get_contents($path), true);
 
-file_put_contents($path, json_encode($ordini, JSON_PRETTY_PRINT));
+// Crea il nuovo scontrino completo
+$scontrino = [
+	"utente" => $_SESSION["user"] ?? "Guest",
+	"ordini" => $ordini,
+	"totale_finale" => $totale_finale,
+	"timestamp" => date("Y-m-d H:i:s")
+];
+
+// Aggiungi lo scontrino allo storico
+$storico[] = $scontrino;
+
+// Risalva tutto nel file
+file_put_contents($path, json_encode($storico, JSON_PRETTY_PRINT));
+
 ?>
 
 <!DOCTYPE html>
@@ -39,27 +39,41 @@ file_put_contents($path, json_encode($ordini, JSON_PRETTY_PRINT));
 
 <head>
 	<meta charset="UTF-8">
-	<title>Scontrino</title>
+	<title>Scontrino finale</title>
 </head>
 
 <body>
 	<h1>Scontrino di <?= $_SESSION["user"] ?? "Guest" ?></h1>
 
-	<h2>Panino scelto:</h2>
-	<p><?= $panino ?></p>
+	<?php if (empty($ordini)): ?>
+		<p>Nessun ordine effettuato.</p>
+	<?php else: ?>
+		<?php foreach ($ordini as $index => $o): ?>
+			<h2>Ordine <?= $index + 1 ?></h2>
 
-	<h2>Ingredienti extra:</h2>
-	<ul>
-		<?php foreach ($extra as $e) echo "<li>$e</li>"; ?>
-	</ul>
+			<p><strong>Panino:</strong> <?= $o["panino"] ?></p>
 
-	<h2>Salse:</h2>
-	<ul>
-		<?php foreach ($salse as $s) echo "<li>$s</li>"; ?>
-	</ul>
+			<p><strong>Extra:</strong></p>
+			<ul>
+				<?php foreach ($o["extra"] as $e): ?>
+					<li><?= $e ?></li>
+				<?php endforeach; ?>
+			</ul>
 
-	<h2>Totale da pagare:</h2>
-	<p><strong><?= number_format($totale, 2) ?> €</strong></p>
+			<p><strong>Salse:</strong></p>
+			<ul>
+				<?php foreach ($o["salse"] as $s): ?>
+					<li><?= $s ?></li>
+				<?php endforeach; ?>
+			</ul>
+
+			<p><strong>Totale ordine:</strong> <?= number_format($o["totale"], 2) ?> €</p>
+			<hr>
+		<?php endforeach; ?>
+
+		<h2>Totale finale:</h2>
+		<p><strong><?= number_format($totale_finale, 2) ?> €</strong></p>
+	<?php endif; ?>
 
 	<br>
 	<a href="../views/home.php">Torna indietro</a>

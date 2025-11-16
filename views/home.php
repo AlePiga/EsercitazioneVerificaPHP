@@ -16,28 +16,28 @@ session_start();
 	<h2>Panino base</h2>
 	<form method="post" action="../controls/scontrino.php">
 		<div>
-			<input type="radio" name="panino" value="Hamburger">Hamburger<br>
-			<input type="radio" name="panino" value="Salciccia">Salciccia<br>
-			<input type="radio" name="panino" value="Vegano">Vegano<br>
-			<input type="radio" name="panino" value="Toast">Toast<br>
+			<input id="paninoA" type="radio" name="panino" value="Hamburger" required><label for="paninoA">Hamburger</label><br>
+			<input id="paninoB" type="radio" name="panino" value="Salciccia"><label for="paninoB">Salciccia</label><br>
+			<input id="paninoC" type="radio" name="panino" value="Vegano"><label for="paninoC">Vegano</label><br>
+			<input id="paninoD" type="radio" name="panino" value="Toast"><label for="paninoD">Toast</label><br>
 		</div>
 		<div>
 			<h2>Ingredienti extra</h2>
-			<input id="a" type="checkbox" name="extra" value="Patty extra"><label for="a">Patty extra</label><br>
-			<input id="b" type="checkbox" name="extra" value="Insalata extra"><label for="b">Insalata extra</label><br>
-			<input id="c" type="checkbox" name="extra" value="Pomodoro extra"><label for="c">Pomodoro extra</label><br>
-			<input id="d" type="checkbox" name="extra" value="Bacon extra"><label for="d">Bacon extra</label><br>
-			<input id="e" type="checkbox" name="extra" value="Cheddar extra"><label for="e">Cheddar extra</label><br>
+			<input id="a" type="checkbox" name="extra[]" value="Patty extra"><label for="a">Patty extra</label><br>
+			<input id="b" type="checkbox" name="extra[]" value="Insalata extra"><label for="b">Insalata extra</label><br>
+			<input id="c" type="checkbox" name="extra[]" value="Pomodoro extra"><label for="c">Pomodoro extra</label><br>
+			<input id="d" type="checkbox" name="extra[]" value="Bacon extra"><label for="d">Bacon extra</label><br>
+			<input id="e" type="checkbox" name="extra[]" value="Cheddar extra"><label for="e">Cheddar extra</label><br>
 		</div>
 		<div>
 			<h2>Salse</h2>
-			<input id="f" type="checkbox" name="salsa" value="Ketchup"><label for="f">Ketchup</label><br>
-			<input id="g" type="checkbox" name="salsa" value="Mayonese"><label for="g">Mayonese</label><br>
-			<input id="h" type="checkbox" name="salsa" value="Salsa rosa"><label for="h">Salsa rosa</label><br>
-			<input id="i" type="checkbox" name="salsa" value="Yogurt"><label for="i">Yogurt</label><br>
+			<input id="f" type="checkbox" name="salsa[]" value="Ketchup"><label for="f">Ketchup</label><br>
+			<input id="g" type="checkbox" name="salsa[]" value="Mayonese"><label for="g">Mayonese</label><br>
+			<input id="h" type="checkbox" name="salsa[]" value="Salsa rosa"><label for="h">Salsa rosa</label><br>
+			<input id="i" type="checkbox" name="salsa[]" value="Yogurt"><label for="i">Yogurt</label><br>
 		</div>
 		<br>
-		<input type="button" value="Aggiungi" onclick="aggiungiPanino()">
+		<button type="submit" formaction="../controls/aggiungi.php">Aggiungi</button>
 		<button type="submit">Scontrino</button>
 	</form>
 </body>
