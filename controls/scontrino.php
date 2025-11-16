@@ -7,7 +7,7 @@ $prezzo_extra = 2;
 $panino = $_POST["panino"] ?? null;
 $extra = $_POST["extra"] ?? [];
 $salsa = $_POST["salsa"] ?? [];
-die(count($_POST["extra"]));
+
 // Calcola il totale
 $totale = 5;
 $totale += count($extra) * $prezzo_extra;
