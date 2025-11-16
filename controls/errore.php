@@ -8,7 +8,9 @@
 </head>
 
 <body>
-	<p>Errore!</p>
+	<h2>404! Yikes!</h2>
+	<p>Errore! Ricontrolla email e password oppure registra un nuovo account</p>
+	<br><a href="../views/register.php">Pagina di registrazione</a>
 </body>
 
 </html>

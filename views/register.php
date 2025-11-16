@@ -19,7 +19,7 @@ $db = new Database();
         <input type="text" name="nome"><br>
         <label>Password: </label><br>
         <input type="password" name="password">
-        <button type="submit">Login</button>
+        <button type="submit">Registra un nuovo account</button>
     </form>
 </body>
 

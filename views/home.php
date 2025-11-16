@@ -8,6 +8,7 @@
 
 </head>
 <?php
+/* Starta la sessione */
 session_start();
 ?>
 
@@ -16,6 +17,8 @@ session_start();
 	<h2>Panino base</h2>
 	<form method="post" action="../controls/scontrino.php">
 		<div>
+			<!-- ID per richiamare la label associata (così clicco sulla label e mi seleziona l'opzione) -->
+			<!-- Required per indicare che è obbligatorio da selezionare -->
 			<input id="paninoA" type="radio" name="panino" value="Hamburger" required><label for="paninoA">Hamburger</label><br>
 			<input id="paninoB" type="radio" name="panino" value="Salciccia"><label for="paninoB">Salciccia</label><br>
 			<input id="paninoC" type="radio" name="panino" value="Vegano"><label for="paninoC">Vegano</label><br>
@@ -37,11 +40,11 @@ session_start();
 			<input id="i" type="checkbox" name="salsa[]" value="Yogurt"><label for="i">Yogurt</label><br>
 		</div>
 		<br>
+		<!-- Per aggiungerlo ad una lista di ordini -->
 		<button type="submit" formaction="../controls/aggiungi.php">Aggiungi</button>
+		<!-- Per stampare lo scontrino -->
 		<button type="submit">Scontrino</button>
 	</form>
 </body>
-
-<script src="script.js"></script>
 
 </html>
