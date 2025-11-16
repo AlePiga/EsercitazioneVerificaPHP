@@ -1,0 +1,27 @@
+[
+    {
+        "utente": "Ale",
+        "panino": "Salciccia",
+        "extra": "Cheddar extra",
+        "salse": "Salsa rosa"
+    },
+    {
+        "utente": "alepiga",
+        "panino": "Salciccia",
+        "extra": [
+            "Patty extra",
+            "Pomodoro extra"
+        ],
+        "salse": [
+            "Ketchup"
+        ],
+        "totale": 9
+    },
+    {
+        "utente": "alepiga",
+        "panino": null,
+        "extra": [],
+        "salse": [],
+        "totale": 5
+    }
+]
